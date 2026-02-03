@@ -1,15 +1,17 @@
 const { execSync } = require('child_process');
 
 function shouldRunMigrations() {
-  if (process.env.RUN_PRISMA_MIGRATIONS === 'true') return true;
-  if (process.env.VERCEL_ENV === 'production') return true;
-  return false;
+  return process.env.RUN_PRISMA_MIGRATIONS === 'true';
+}
+
+function shouldIgnoreMigrationErrors() {
+  return process.env.IGNORE_PRISMA_MIGRATION_ERRORS === 'true';
 }
 
 function main() {
   if (!shouldRunMigrations()) {
     console.log(
-      'Skipping Prisma migrations (set RUN_PRISMA_MIGRATIONS=true to enable for this environment).'
+      'Skipping Prisma migrations (set RUN_PRISMA_MIGRATIONS=true to enable for this build).'
     );
     return;
   }
@@ -19,7 +21,17 @@ function main() {
   }
 
   console.log('Running Prisma migrations (prisma migrate deploy)...');
-  execSync('npx prisma migrate deploy', { stdio: 'inherit' });
+  try {
+    execSync('npx prisma migrate deploy', { stdio: 'inherit' });
+  } catch (err) {
+    if (shouldIgnoreMigrationErrors()) {
+      console.warn(
+        'Prisma migrations failed, but IGNORE_PRISMA_MIGRATION_ERRORS=true so the build will continue.'
+      );
+      return;
+    }
+    throw err;
+  }
 }
 
 main();
