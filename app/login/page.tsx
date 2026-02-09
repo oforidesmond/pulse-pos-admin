@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Lock, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { getBrandConfig } from '@/lib/brand';
 
 export default function LoginPage() {
   const router = useRouter();
+  const brand = getBrandConfig();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -75,9 +77,9 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4">
-            <span className="text-white text-2xl">S</span>
+            <span className="text-white text-2xl">{brand.logoText}</span>
           </div>
-          <h1 className="text-gray-900 mb-2">Sika Ventures Admin</h1>
+          <h1 className="text-gray-900 mb-2">{brand.appName}</h1>
           <p className="text-gray-600">Sign in to your account</p>
         </div>
 
@@ -135,7 +137,7 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-6 text-center">
-          <p className="text-gray-600 text-sm">© 2025 Sika Ventures. All rights reserved.</p>
+          <p className="text-gray-600 text-sm">© {new Date().getFullYear()} {brand.businessName}. All rights reserved.</p>
         </div>
       </div>
     </div>

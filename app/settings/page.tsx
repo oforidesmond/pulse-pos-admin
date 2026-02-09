@@ -5,12 +5,14 @@ import { Save, CheckCircle, XCircle, RefreshCw, Building2, User, Lock } from 'lu
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { getBrandConfig } from '@/lib/brand';
 
 export default function SettingsPage() {
-  const [businessName, setBusinessName] = useState('Sika Ventures Admin');
-  const [businessEmail, setBusinessEmail] = useState('descoservicesgh2@gmail.com');
-  const [businessPhone, setBusinessPhone] = useState('0554492626');
-  const [businessAddress, setBusinessAddress] = useState('Spintex Road, Texpo');
+  const brand = getBrandConfig();
+  const [businessName, setBusinessName] = useState(brand.businessName);
+  const [businessEmail, setBusinessEmail] = useState(brand.businessEmail);
+  const [businessPhone, setBusinessPhone] = useState(brand.businessPhone);
+  const [businessAddress, setBusinessAddress] = useState(brand.businessAddress);
   const [timezone, setTimezone] = useState('America/New_York');
   const [syncStatus, setSyncStatus] = useState<'active' | 'inactive'>('active');
 

@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import AppShell from '@/components/layout/app-shell';
+import { getBrandConfig } from '@/lib/brand';
+
+const brand = getBrandConfig();
 
 export const metadata: Metadata = {
-  title: 'Sika Ventures Admin',
-  description: 'Admin dashboard experience for Sika Ventures.',
+  title: brand.metaTitle,
+  description: brand.metaDescription,
   icons: {
-    icon: '/pos-icon.ico',
+    icon: brand.iconPath,
   },
 };
 

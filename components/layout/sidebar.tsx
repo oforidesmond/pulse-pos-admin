@@ -3,18 +3,20 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NAV_ITEMS } from '@/lib/navigation';
+import { getBrandConfig } from '@/lib/brand';
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const brand = getBrandConfig();
 
   return (
     <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
       <div className="h-16 flex items-center px-6 border-b border-gray-200">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white">S</span>
+            <span className="text-white">{brand.logoText}</span>
           </div>
-          <span className="text-gray-900">Sika Ventures</span>
+          <span className="text-gray-900">{brand.businessName}</span>
         </div>
       </div>
 
@@ -42,10 +44,15 @@ export default function Sidebar() {
       </nav>
 
       <div className="p-4 border-t border-gray-200">
-        <div className="bg-blue-50 rounded-lg p-4">
+        <a
+          href={brand.supportUrl}
+          target={brand.supportUrl.startsWith('http') ? '_blank' : undefined}
+          rel={brand.supportUrl.startsWith('http') ? 'noreferrer' : undefined}
+          className="block bg-blue-50 rounded-lg p-4"
+        >
           <p className="text-blue-900 mb-1">Need Help?</p>
           <p className="text-blue-700 text-sm">Check our documentation</p>
-        </div>
+        </a>
       </div>
     </aside>
   );
