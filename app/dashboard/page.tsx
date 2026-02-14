@@ -266,12 +266,12 @@ export default function DashboardPage() {
       <tbody className="divide-y divide-gray-200">
         {recentActivity.map((activity) => (
           <tr key={activity.id} className="hover:bg-gray-50 transition-colors">
-            <td className="px-6 py-4 text-gray-900">{activity.action}</td>
-            <td className="px-6 py-4 text-gray-700">{activity.context}</td>
-            <td className="px-6 py-4 text-gray-700">
+            <td className="px-4 sm:px-6 py-4 text-gray-900">{activity.action}</td>
+            <td className="px-4 sm:px-6 py-4 text-gray-700">{activity.context}</td>
+            <td className="px-4 sm:px-6 py-4 text-gray-700">
               {activity.amount !== null ? formatCurrency(activity.amount) : '—'}
             </td>
-            <td className="px-6 py-4 text-gray-500 text-sm">{formatTimestamp(activity.timestamp)}</td>
+            <td className="px-4 sm:px-6 py-4 text-gray-500 text-sm">{formatTimestamp(activity.timestamp)}</td>
           </tr>
         ))}
       </tbody>
@@ -279,13 +279,13 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="p-8">
-      <div className="mb-8">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="mb-6 sm:mb-8">
         <h1 className="text-gray-900 mb-2">Dashboard Overview</h1>
         <p className="text-gray-600">Welcome back! Here's what's happening with your store today.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
         {statCards.map((card) => (
           <StatCard
             key={card.title}
@@ -298,7 +298,7 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
         <Card className="lg:col-span-2">
           <CardHeader>
             <h3 className="text-gray-900">Weekly Sales Overview</h3>
@@ -323,10 +323,10 @@ export default function DashboardPage() {
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Action</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Context</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Amount</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Time</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Action</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Context</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Amount</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Time</th>
                 </tr>
               </thead>
               {renderRecentActivity()}

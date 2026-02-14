@@ -165,10 +165,10 @@ export default function InventoryPage() {
           const stockPercentage = getStockPercentage(item.quantity, item.reorderLevel);
           return (
             <tr key={item.id} className="hover:bg-gray-50 transition-colors">
-              <td className="px-6 py-4 text-gray-900">{item.name}</td>
-              <td className="px-6 py-4 text-gray-700">{item.sku || '—'}</td>
-              <td className="px-6 py-4 text-gray-900">{item.quantity} units</td>
-              <td className="px-6 py-4">
+              <td className="px-4 sm:px-6 py-4 text-gray-900">{item.name}</td>
+              <td className="px-4 sm:px-6 py-4 text-gray-700">{item.sku || '—'}</td>
+              <td className="px-4 sm:px-6 py-4 text-gray-900">{item.quantity} units</td>
+              <td className="px-4 sm:px-6 py-4">
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
                     className={`h-2 rounded-full ${
@@ -182,11 +182,11 @@ export default function InventoryPage() {
                   />
                 </div>
               </td>
-              <td className="px-6 py-4 text-gray-700">{item.reorderLevel} units</td>
-              <td className="px-6 py-4 text-gray-700">
+              <td className="px-4 sm:px-6 py-4 text-gray-700">{item.reorderLevel} units</td>
+              <td className="px-4 sm:px-6 py-4 text-gray-700">
                 {new Date(item.lastRestocked).toLocaleDateString('en-GB')}
               </td>
-              <td className="px-6 py-4">
+              <td className="px-4 sm:px-6 py-4">
                 <span className={`px-3 py-1 rounded-full text-sm capitalize ${getStatusColor(item.status)}`}>
                   {item.status.replace('-', ' ')}
                 </span>
@@ -199,8 +199,8 @@ export default function InventoryPage() {
   };
 
   return (
-    <div className="p-8">
-      <div className="mb-8">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="mb-6 sm:mb-8">
         <h1 className="text-gray-900 mb-2">Inventory Management</h1>
         <p className="text-gray-600">Monitor and manage your stock levels</p>
       </div>
@@ -274,8 +274,8 @@ export default function InventoryPage() {
 
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between gap-4">
-            <div className="relative flex-1 max-w-md">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+            <div className="relative flex-1 sm:max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
               <input
                 type="text"
@@ -285,18 +285,18 @@ export default function InventoryPage() {
                 className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
               <select
                 value={filterStatus}
                 onChange={(event) => setFilterStatus(event.target.value as typeof filterStatus)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="all">All Status</option>
                 <option value="in-stock">In Stock</option>
                 <option value="low-stock">Low Stock</option>
                 <option value="out-of-stock">Out of Stock</option>
               </select>
-              <Button variant="outline">
+              <Button variant="outline" className="w-full sm:w-auto justify-center">
                 <Filter size={20} />
                 More Filters
               </Button>
@@ -308,13 +308,13 @@ export default function InventoryPage() {
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Product Name</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">SKU</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Current Stock</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Stock Level</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Reorder Level</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Last Restocked</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Status</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Product Name</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">SKU</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Current Stock</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Stock Level</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Reorder Level</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Last Restocked</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Status</th>
                 </tr>
               </thead>
               {renderTableBody()}
@@ -322,7 +322,7 @@ export default function InventoryPage() {
             
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between px-4 sm:px-6 py-4 border-t border-gray-200">
                 <div className="text-sm text-gray-600">
                   Showing <span className="font-medium">{Math.min(indexOfFirstItem + 1, totalItems)}</span> to{' '}
                   <span className="font-medium">
@@ -330,7 +330,7 @@ export default function InventoryPage() {
                   </span>{' '}
                   of <span className="font-medium">{totalItems}</span> results
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => paginate(Math.max(1, currentPage - 1))}
                     disabled={currentPage === 1}

@@ -1,10 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Bell, Search, LogOut, User } from 'lucide-react';
+import { Bell, Search, LogOut, User, Menu } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-export default function TopBar() {
+type TopBarProps = {
+  onMobileMenuClick?: () => void;
+};
+
+export default function TopBar({ onMobileMenuClick }: TopBarProps) {
   const router = useRouter();
   const [currentDate, setCurrentDate] = useState('');
 
@@ -31,9 +35,20 @@ export default function TopBar() {
   };
 
   return (
-    <header className="h-16 bg-white border-b border-gray-200 px-8 flex items-center justify-between">
-      <div className="flex items-center gap-4 flex-1">
-        <div className="relative max-w-md w-full">
+    <header className="h-16 bg-white border-b border-gray-200 px-4 md:px-8 flex items-center justify-between gap-3">
+      <div className="flex items-center gap-3 flex-1 min-w-0">
+        {onMobileMenuClick && (
+          <button
+            type="button"
+            onClick={onMobileMenuClick}
+            className="md:hidden p-2 rounded-lg hover:bg-gray-50 text-gray-700"
+            aria-label="Open navigation"
+          >
+            <Menu size={20} />
+          </button>
+        )}
+
+        <div className="relative max-w-md w-full hidden sm:block">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
           <input
             type="text"
@@ -43,8 +58,8 @@ export default function TopBar() {
         </div>
       </div>
 
-      <div className="flex items-center gap-6">
-        <span className="text-gray-600 text-sm whitespace-nowrap">
+      <div className="flex items-center gap-3 md:gap-6">
+        <span className="hidden lg:inline text-gray-600 text-sm whitespace-nowrap">
           {currentDate || 'Loading date…'}
         </span>
 
@@ -53,11 +68,11 @@ export default function TopBar() {
           <span className="absolute top-1 right-1 w-2 h-2 bg-blue-600 rounded-full" />
         </button>
 
-        <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
-          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+        <div className="flex items-center gap-2 md:gap-3 md:pl-4 md:border-l md:border-gray-200">
+          <div className="w-9 h-9 md:w-10 md:h-10 bg-blue-100 rounded-full flex items-center justify-center">
             <User size={20} className="text-blue-600" />
           </div>
-          <div>
+          <div className="hidden md:block">
             <p className="text-gray-900 text-sm">Admin User</p>
             <p className="text-gray-500 text-xs">Administrator</p>
           </div>

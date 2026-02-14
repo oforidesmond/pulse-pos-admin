@@ -387,18 +387,18 @@ export default function SalesReportsPage() {
       <tbody className="divide-y divide-gray-200">
         {paginatedTransactions.map((sale) => (
           <tr key={sale.id} className="hover:bg-gray-50 transition-colors">
-            <td className="px-6 py-4 text-gray-900">{sale.invoiceNumber}</td>
-            <td className="px-6 py-4 text-gray-700">{sale.date}</td>
+            <td className="px-4 sm:px-6 py-4 text-gray-900">{sale.invoiceNumber}</td>
+            <td className="px-4 sm:px-6 py-4 text-gray-700">{sale.date}</td>
             {/* <td className="px-6 py-4 text-gray-900">{sale.customer}</td> */}
-            <td className="px-6 py-4 text-gray-700">{sale.items}</td>
-            <td className="px-6 py-4 text-gray-700 capitalize">{sale.paymentMethod}</td>
-            <td className="px-6 py-4 text-gray-900">{formatCurrency(sale.total)}</td>
-            <td className="px-6 py-4">
+            <td className="px-4 sm:px-6 py-4 text-gray-700">{sale.items}</td>
+            <td className="px-4 sm:px-6 py-4 text-gray-700 capitalize">{sale.paymentMethod}</td>
+            <td className="px-4 sm:px-6 py-4 text-gray-900">{formatCurrency(sale.total)}</td>
+            <td className="px-4 sm:px-6 py-4">
               <span className={`px-3 py-1 rounded-full text-sm capitalize ${statusColor(sale.status)}`}>
                 {sale.status}
               </span>
             </td>
-            <td className="px-6 py-4">
+            <td className="px-4 sm:px-6 py-4">
               <Button
                 variant="outline"
                 size="sm"
@@ -415,25 +415,25 @@ export default function SalesReportsPage() {
   };
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
         <div>
           <h1 className="text-gray-900 mb-2">Sales Reports</h1>
           <p className="text-gray-600">Track and analyze your sales performance</p>
         </div>
-        <div className="flex gap-3">
-          <Button onClick={() => handleExport('csv')} variant="outline">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+          <Button onClick={() => handleExport('csv')} variant="outline" className="w-full sm:w-auto justify-center">
             <FileText size={20} />
             Export CSV
           </Button>
-          <Button onClick={() => handleExport('pdf')} variant="outline">
+          <Button onClick={() => handleExport('pdf')} variant="outline" className="w-full sm:w-auto justify-center">
             <Download size={20} />
             Export PDF
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
@@ -497,11 +497,11 @@ export default function SalesReportsPage() {
           </CardContent>
         </Card>
       </div>
-  <Card className='mb-8'>
+      <Card className="mb-6">
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <h3 className="text-gray-900 font-bold text-lg">Sales Transactions</h3>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-2">
               <Calendar size={20} className="text-gray-400" />
               <div className="flex flex-wrap items-center gap-2">
                 <div className="relative">
@@ -515,7 +515,7 @@ export default function SalesReportsPage() {
                         setEndDate(value);
                       }
                     }}
-                    className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-[12.5rem] max-w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                   <Calendar size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
                 </div>
@@ -526,7 +526,7 @@ export default function SalesReportsPage() {
                     value={endDate}
                     min={startDate || undefined}
                     onChange={(event) => setEndDate(event.target.value)}
-                    className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-[12.5rem] max-w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                   <Calendar size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
                 </div>
@@ -552,21 +552,21 @@ export default function SalesReportsPage() {
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Invoice #</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Date</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Invoice #</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Date</th>
                   {/* <th className="px-6 py-3 text-left text-gray-700 text-sm">Customer</th> */}
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Items</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Payment</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Total</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Status</th>
-                  <th className="px-6 py-3 text-left text-gray-700 text-sm">Actions</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Items</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Payment</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Total</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Status</th>
+                  <th className="px-4 sm:px-6 py-3 text-left text-gray-700 text-sm">Actions</th>
                 </tr>
               </thead>
               {renderTransactions()}
             </table>
           </div>
           {filteredTransactions.length > 0 && (
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 px-6 py-4 border-t border-gray-100">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 px-4 sm:px-6 py-4 border-t border-gray-100">
               <p className="text-sm text-gray-500">
                 Showing <span className="font-medium text-gray-900">{showingFrom}</span> to{' '}
                 <span className="font-medium text-gray-900">{showingTo}</span> of{' '}
@@ -610,12 +610,12 @@ export default function SalesReportsPage() {
       </Card>
       <Card className="mb-5">
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h3 className="text-gray-900">Revenue Overview</h3>
             <select
               value={dateRange}
               onChange={(event) => setDateRange(event.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="last7days">Last 7 Days</option>
               <option value="last30days">Last 30 Days</option>

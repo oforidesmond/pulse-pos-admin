@@ -14,6 +14,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
   const isPublicRoute = PUBLIC_PATHS.includes(pathname ?? '/');
   const [isCheckingAuth, setIsCheckingAuth] = useState(!isPublicRoute);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -46,6 +47,10 @@ export default function AppShell({ children }: { children: ReactNode }) {
 
     setIsCheckingAuth(false);
   }, [isPublicRoute, router]);
+
+  useEffect(() => {
+    setIsMobileNavOpen(false);
+  }, [pathname]);
 
   // Handle browser/tab close
   useEffect(() => {
@@ -82,10 +87,15 @@ export default function AppShell({ children }: { children: ReactNode }) {
     );
   } else {
     content = (
-      <div className="flex h-screen bg-gray-50">
-        <Sidebar />
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <TopBar />
+      <div className="flex min-h-dvh bg-gray-50">
+        <div className="hidden md:flex">
+          <Sidebar />
+        </div>
+        <div className="md:hidden">
+          <Sidebar isMobileOpen={isMobileNavOpen} onMobileClose={() => setIsMobileNavOpen(false)} />
+        </div>
+        <div className="flex-1 flex flex-col min-w-0">
+          <TopBar onMobileMenuClick={() => setIsMobileNavOpen(true)} />
           <main className="flex-1 overflow-y-auto bg-gray-50">{children}</main>
         </div>
       </div>
